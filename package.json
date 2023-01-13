@@ -1,0 +1,56 @@
+{
+  "name": "feed-machine",
+  "version": "0.1.0",
+  "author": "Sidharrth Nagappan, Isak Sundstrom and Erfan Gholami",
+  "description": "The Feed Machine is a social media filter, that effectively sorts posts into topics and allows you to customise the types of posts you want to see at different times of the day.",
+  "private": true,
+  "dependencies": {
+    "@chakra-ui/react": "^2.4.6",
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
+    "@fontsource/dm-sans": "^4.5.9",
+    "@mui/material": "^5.11.3",
+    "@mui/styles": "^5.11.2",
+    "@mui/x-date-pickers": "^5.0.13",
+    "@reduxjs/toolkit": "^1.9.1",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^14.4.3",
+    "axios": "^1.2.2",
+    "chakra-react-select": "^4.4.3",
+    "dayjs": "^1.11.7",
+    "framer-motion": "^6.5.1",
+    "lodash": "^4.17.21",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-icons": "^3.11.0",
+    "react-redux": "^8.0.5",
+    "react-router-dom": "^5.3.4",
+    "react-router-redux": "^4.0.8",
+    "react-scripts": "5.0.1",
+    "recharts": "^2.2.0",
+    "redux-toolkit": "^1.1.2",
+    "web-vitals": "^2.1.4"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
