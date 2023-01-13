@@ -1,0 +1,81 @@
+/* eslint-disable no-unused-vars */
+const posts = [
+  {
+    id: 'p1',
+    user: 'Elon Musk',
+    userPhoto: 'musk.jpeg',
+    body: 'Tesla team just completed a 500 mile drive with a Tesla Semi weighing in at 81,000 lbs!',
+    liked: true,
+    topics: ['vehicles', 'news'],
+    time: '1h',
+  },
+  {
+    id: 'p2',
+    user: 'CNN',
+    userPhoto: 'cnn.png',
+    body: 'American President Joe Biden announces universal Medicaid from the steps of the White house.',
+    liked: false,
+    topics: ['politics', 'news'],
+    time: '2h',
+  },
+  {
+    id: 'p3',
+    user: 'BBC',
+    userPhoto: 'bbc.jpeg',
+    body: 'The UK has announced a new 10pm curfew for pubs and restaurants in an effort to curb the spread of COVID-19.',
+    liked: false,
+    topics: ['news'],
+    time: '3h',
+  },
+  {
+    id: 'p4',
+    user: 'Sidharrth Nagappan',
+    userPhoto: 'sid.jpeg',
+    body: 'I just got my first job as a software engineer! I am so excited to start my career!',
+    liked: false,
+    topics: ['friends_and_family'],
+    time: '4h',
+  },
+  {
+    id: 'p5',
+    user: 'Isak',
+    userPhoto: 'isak.png',
+    body: 'Frosty morning in Stockholm, love waking up to this view!',
+    liked: false,
+    topics: ['friends_and_family'],
+    image: 'stockholm.jpg',
+    time: '5h',
+  },
+  {
+    id: 'p6',
+    user: 'Al Jazeera',
+    userPhoto: 'aljazeera.png',
+    body: 'The Taliban has taken control of Afghanistan, with the US and NATO forces withdrawing from the country.',
+    liked: false,
+    topics: ['news'],
+    time: '6h',
+  },
+  {
+    id: 'p7',
+    user: 'BBC',
+    userPhoto: 'bbc.jpeg',
+    body: 'Alox Sharma gives speech at COP27 summit in Egypt about constructive climate policy.',
+    liked: false,
+    topics: ['climate', 'news'],
+    time: '7h',
+  },
+  {
+    id: 'p8',
+    user: 'Sidharrth Nagappan',
+    userPhoto: 'sid.jpeg',
+    body: 'Family trip to the beach! So much fun!',
+    liked: false,
+    topics: ['friends_and_family'],
+    image: 'beach.jpg',
+    time: '8h',
+  },
+];
+
+// export to json file
+
+// module.exports = posts;

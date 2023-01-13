@@ -1,2 +1,15 @@
-node_modules/
-.env
+app/node_modules/
+app/.env
+app/.gitignore
+
+server/node_modules/
+server/.npmrc
+server/yarn-error.log
+server/.env
+
+# Environment varibales
+server/.env*
+server/!.env*.example
+
+# Code coverage
+server/coverage
