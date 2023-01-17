@@ -97,10 +97,10 @@ const filter_periods = {
       timeStart: '14:00',
       timeEnd: '16:00',
     },
-    {
-      timeStart: '18:00',
-      timeEnd: '20:00',
-    },
+    // {
+    //   timeStart: '18:00',
+    //   timeEnd: '20:00',
+    // },
   ],
   Wednesday: [],
   Thursday: [
@@ -256,14 +256,14 @@ const topics = [
     timeEnd: '18:00',
     filter_periods: filter_periods,
   },
-  {
-    id: 't4',
-    name: 'vehicles',
-    color: '#FF0000',
-    timeStart: '10:00',
-    timeEnd: 13,
-    filter_periods: filter_periods,
-  },
+  // {
+  //   id: 't4',
+  //   name: 'vehicles',
+  //   color: '#FF0000',
+  //   timeStart: '10:00',
+  //   timeEnd: 13,
+  //   filter_periods: filter_periods,
+  // },
   {
     id: 't5',
     name: 'friends_and_family',

@@ -27,10 +27,10 @@ import {
   VStack,
   useDisclosure,
 } from '@chakra-ui/react';
-import { FaFilter, FaHome, FaPlus } from 'react-icons/fa';
+import { CgPen, CgProfile } from 'react-icons/cg';
+import { FaEdit, FaFilter, FaHome, FaPlus } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { CgProfile } from 'react-icons/cg';
 import ClockIcon from '../../assets/clock.svg';
 import { GiTimeBomb } from 'react-icons/gi';
 import NiceButton from '../../components/Button';
@@ -154,6 +154,15 @@ export default function FilterScreen() {
                         history.push(`/timing/${filter.name}`);
                       }}
                     /> */}
+                      <Icon
+                        as={CgPen}
+                        boxSize={6}
+                        color={'#0053d6'}
+                        onClick={() => {
+                          history.push(`/edit-topic/${filter.name}`);
+                        }}
+                      />
+
                       <Image
                         maxW={7}
                         src={ClockIcon}

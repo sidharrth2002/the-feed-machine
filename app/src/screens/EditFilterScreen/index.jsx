@@ -44,9 +44,9 @@ export default function EditFilterScreen(props) {
   filter = filters.find(f => f.name === filter);
   const [name, setName] = useState(get(filter, 'name', ''));
   const [description, setDescription] = useState(
-    get(filter, 'description', '')
+    get(filter, 'description', ' ')
   );
-  const [topics, setTopics] = useState(get(filter, 'subtopics', []));
+  const [topics, setTopics] = useState(get(filter, 'subtopics', [name]));
 
   const updateFilter = () => {
     dispatch(

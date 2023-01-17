@@ -28,13 +28,13 @@ import {
 import { FaArrowLeft, FaPlus, FaTrash } from 'react-icons/fa';
 import { LocalizationProvider, TimePicker } from '@mui/x-date-pickers';
 import { ThemeProvider, createTheme } from '@mui/material';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import NiceButton from '../../components/Button';
 import TextField from '@mui/material/TextField';
 import { UPDATE_GENERAL_TIMING } from '../../features/counter';
 import { useHistory } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 import { useState } from 'react';
 
 function numDigits(x) {
@@ -51,6 +51,7 @@ export default function TimingScreen() {
   const [day, setDay] = useState('');
   const [index, setIndex] = useState(0);
   const toast = useToast();
+  const dispatch = useDispatch();
 
   return (
     <Box minHeight={'100vh'} padding={4} width="100%" pt={8} pl={8} pr={8}>
@@ -171,6 +172,8 @@ export default function TimingScreen() {
                                 });
                               }
 
+                              console.log(value.format('HH:mm'));
+
                               let new_timing = {
                                 ...timings,
                                 [key]: [
@@ -182,10 +185,15 @@ export default function TimingScreen() {
                                   ...timings[key].slice(index + 1),
                                 ],
                               };
+
+                              console.log(new_timing);
+
                               setTimings(new_timing);
-                              UPDATE_GENERAL_TIMING({
-                                new_timing,
-                              });
+                              dispatch(
+                                UPDATE_GENERAL_TIMING({
+                                  new_timing,
+                                })
+                              );
                             }}
                             renderInput={params => <TextField {...params} />}
                           />
@@ -205,8 +213,8 @@ export default function TimingScreen() {
                   );
                 })}
                 <HStack
-                  onClick={() =>
-                    setTimings({
+                  onClick={() => {
+                    let new_timing = {
                       ...timings,
                       [key]: [
                         ...timings[key],
@@ -215,8 +223,14 @@ export default function TimingScreen() {
                           timeEnd: '00:00',
                         },
                       ],
-                    })
-                  }
+                    };
+                    setTimings(new_timing);
+                    dispatch(
+                      UPDATE_GENERAL_TIMING({
+                        new_timing,
+                      })
+                    );
+                  }}
                   spacing={2}
                   cursor={'pointer'}
                 >

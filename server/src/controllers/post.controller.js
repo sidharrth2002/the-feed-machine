@@ -5,8 +5,10 @@ const Post = require('../models/post.model');
 const { zeroShotService } = require('../services');
 
 const createPost = catchAsync(async (req, res) => {
+  console.log(req.body);
   const label = await zeroShotService.classify(req.body.body);
-  res.body.topics = [label];
+  req.body.topics = [label];
+  req.body.user = 'John Wayne';
   const post = await Post.create(req.body);
   res.status(httpStatus.CREATED).send(post);
 });

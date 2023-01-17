@@ -40,7 +40,14 @@ export default function BuildFilterScreen() {
   const toast = useToast();
 
   const buildFilter = () => {
-    dispatch(ADD_FILTER({ name, description, topics }));
+    dispatch(
+      ADD_FILTER({
+        name: name.toLowerCase(),
+        description,
+        subtopics: topics.map(t => t.toLowerCase()),
+        custom: topics.length > 0,
+      })
+    );
   };
 
   return (
@@ -100,12 +107,19 @@ export default function BuildFilterScreen() {
             <Select
               isMulti
               name="topics"
-              options={filters
-                .filter(f => f.custom !== true)
+              options={[
+                'news',
+                'politics',
+                'climate',
+                'sports',
+                'entertainment',
+                'vehicles',
+              ]
+                .filter(f => filters.map(f => f.name).includes(f) === false)
                 .map(topic => {
                   return {
-                    value: topic.name,
-                    label: make_topic_name_presentable(topic.name),
+                    value: topic,
+                    label: topic,
                   };
                 })}
               placeholder="Search for a topic"

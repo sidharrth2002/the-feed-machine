@@ -19,7 +19,11 @@ import {
 } from '@chakra-ui/react';
 import { CgPin, CgProfile } from 'react-icons/cg';
 import { FaClock, FaFilter, FaHome, FaImage, FaPlus } from 'react-icons/fa';
-import { IS_FILTERING_ON, filter_posts } from '../../engine/filtering';
+import {
+  IS_FILTERING_ON,
+  filter_posts,
+  isTopicFilteredNow,
+} from '../../engine/filtering';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -57,7 +61,7 @@ export default function HomeScreen() {
       user: user,
       body: post_body,
       liked: false,
-      userPhoto: 'sid.jpeg',
+      userPhoto: 'avatar.jpg',
       time: '0h',
       topics: [],
     };
@@ -161,19 +165,23 @@ export default function HomeScreen() {
                 posts,
                 filters,
                 manually_filter,
-                manually_ignore
-              ).map((post, index) => (
-                <Post
-                  key={post.id}
-                  topics={post.topics}
-                  feed_filtering
-                  {...post}
-                />
-              ))
-            : posts.map((post, index) => (
-                <Post key={post.id} topics={post.topics} {...post} />
-              ))}
-          <Post />
+                manually_ignore,
+                generalTiming
+              )
+                .reverse()
+                .map((post, index) => (
+                  <Post
+                    key={post.id}
+                    topics={post.topics}
+                    feed_filtering
+                    {...post}
+                  />
+                ))
+            : posts
+                .reverse()
+                .map((post, index) => (
+                  <Post key={post.id} topics={post.topics} {...post} />
+                ))}
         </VStack>
       </Skeleton>
       <Modal isOpen={isOpenClock} onClose={onCloseClock}>
@@ -195,13 +203,50 @@ export default function HomeScreen() {
                   minute: 'numeric',
                 })}
               </Text>
-              <Text>Now Showing:</Text>
+              <Text mb={4}>Now Filtering:</Text>
               <HStack
                 spacing={2}
                 width={'70%'}
                 wrap={'flex-wrap'}
                 justifyContent={'center'}
               >
+                {filters
+                  .filter(filter => {
+                    return (
+                      isTopicFilteredNow(
+                        filter.name,
+                        filters,
+                        generalTiming,
+                        manually_filter,
+                        manually_ignore
+                      ) ||
+                      (manually_filter.includes(filter.name) &&
+                        !manually_ignore.includes(filter.name))
+                    );
+                  })
+                  .map((topic, index) => topic.name)
+                  .map((topic, index) => (
+                    <HStack
+                      key={index}
+                      minWidth="85px"
+                      py={2}
+                      px={3}
+                      backgroundColor="#001C55"
+                      borderRadius={20}
+                      spacing={1}
+                      mr={2}
+                      mb={2}
+                    >
+                      <Icon
+                        as={get_topic_icon(topic)}
+                        boxSize={5}
+                        color="white"
+                      />
+                      <Text color="white">
+                        {make_topic_name_presentable(topic)}
+                      </Text>
+                    </HStack>
+                  ))}
                 {/* {get_currently_filtered_topics(
                   posts,
                   filters,

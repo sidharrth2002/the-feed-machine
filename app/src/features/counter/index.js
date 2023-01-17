@@ -34,6 +34,16 @@ export const authSlice = createSlice({
         description: action.payload.description,
         id: 'f' + state.filters.length + 1,
         subtopics: action.payload.subtopics,
+        filter_periods: {
+          Monday: [],
+          Tuesday: [],
+          Wednesday: [],
+          Thursday: [],
+          Friday: [],
+          Saturday: [],
+          Sunday: [],
+        },
+        custom: action.payload.custom,
       });
     },
     UPDATE_FILTER: (state, action) => {
@@ -76,6 +86,8 @@ export const authSlice = createSlice({
       state.posts.unshift(state.posts.pop());
     },
     UPDATE_GENERAL_TIMING: (state, action) => {
+      console.log('UPDATE_GENERAL_TIMING');
+      console.log(action.payload.new_timing);
       state.general_timing = action.payload.new_timing;
     },
     UPDATE_FILTER_PERIODS_FOR_TOPIC: (state, action) => {

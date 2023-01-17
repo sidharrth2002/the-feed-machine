@@ -4,6 +4,7 @@ import SecondSplash from './splash_2.png';
 import SplashLogo from './splash_screen.png';
 import Stockholm from './stockholm.jpeg';
 import aljazeera from './aljazeera.png';
+import avatar from './avatar.jpg';
 import bbc from './bbc.jpeg';
 import beach from './beach.jpeg';
 import cnn from './cnn.png';
@@ -29,6 +30,7 @@ const assets = {
   splash_2,
   splash_screen,
   stockholm,
+  avatar,
 };
 
 export { SplashLogo, SecondSplash, Stockholm, Beach, JohnAvatar };
