@@ -1,6 +1,6 @@
 import { Box, Flex, Heading, Image, Text } from '@chakra-ui/react';
+import { JohnAvatar, SecondSplash, SplashLogo } from '../../assets';
 import React, { useState } from 'react';
-import { SecondSplash, SplashLogo } from '../../assets';
 
 import NiceButton from '../../components/Button';
 import { useHistory } from 'react-router-dom';
@@ -81,6 +81,35 @@ export default function SplashScreen() {
           </Text>
           <Text lineHeight={'25px'} textAlign={'center'}>
             Made with ❤️ by Sidharrth, Erfan and Isak in Torino, 2023.
+          </Text>
+          <NiceButton text={'Next'} onClick={() => setStep(3)} nextArrow />
+        </Flex>
+      )}
+      {step === 3 && (
+        <Flex
+          padding={'3rem'}
+          justifyContent={'center'}
+          alignItems={'center'}
+          flexDirection={'column'}
+        >
+          <Image
+            src={JohnAvatar}
+            alt={'logo'}
+            width={150}
+            mb={5}
+            borderRadius={'50%'}
+            boxShadow={'md'}
+          />
+          <Text
+            lineHeight={'25px'}
+            textAlign={'center'}
+            mb={4}
+            fontSize={'1.1rem'}
+            width={'95%'}
+          >
+            In this prototype, you are John Wayne, a young adult who spends far
+            too much time scrolling through his social media feed. He found it
+            chaotic, random and unpredictable...<i>until now</i>.
           </Text>
           <NiceButton
             text={'Go To App'}

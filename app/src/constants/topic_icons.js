@@ -13,11 +13,19 @@ const topic_icons = {
 };
 
 const get_topic_icon = topic => {
-  if (topic_icons[topic]) {
+  // check if topic is in topic_icons
+  console.log(topic);
+  if (topic in topic_icons) {
     return topic_icons[topic];
   } else {
     return FaGlobe;
   }
+
+  // if (topic_icons[topic]) {
+  //   return topic_icons[topic];
+  // } else {
+  //   return FaGlobe;
+  // }
 };
 
 export { get_topic_icon };

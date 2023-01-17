@@ -1,6 +1,5 @@
 import {
   general_filter_periods,
-  posts,
   topics,
 } from '../../screens/HomeScreen/posts.js';
 
@@ -9,7 +8,7 @@ import { createSlice } from '@reduxjs/toolkit';
 export const authSlice = createSlice({
   name: 'auth',
   initialState: {
-    user: 'Sidharrth Nagappan',
+    user: 'John Wayne',
     posts: [],
     filters: topics,
     filtering: true,
@@ -18,9 +17,7 @@ export const authSlice = createSlice({
     general_timing: general_filter_periods,
   },
   reducers: {
-    TEST: state => {
-      console.log('test');
-    },
+    TEST: state => {},
     SET_POSTS: (state, action) => {
       state.posts = action.payload.posts;
     },
@@ -75,7 +72,7 @@ export const authSlice = createSlice({
       state.posts.push(post);
       // move last element to first of array
       // latest post is at the top
-      console.log(state.posts);
+
       state.posts.unshift(state.posts.pop());
     },
     UPDATE_GENERAL_TIMING: (state, action) => {

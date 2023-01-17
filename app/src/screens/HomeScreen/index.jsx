@@ -26,6 +26,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import NiceButton from '../../components/Button';
 import Post from '../../components/Post';
 import axios from 'axios';
+import { get_topic_icon } from '../../constants/topic_icons';
+import { make_topic_name_presentable } from '../../utils';
 import { useHistory } from 'react-router-dom';
 
 export default function HomeScreen() {
@@ -47,6 +49,7 @@ export default function HomeScreen() {
   const dispatch = useDispatch();
   const history = useHistory();
   const [loading, setLoading] = useState(true);
+  const [emptyPost, setEmptyPost] = useState(false);
 
   const add_post = post_body => {
     const new_post = {
@@ -59,8 +62,6 @@ export default function HomeScreen() {
       topics: [],
     };
     axios.post('http://localhost:8000/v1/posts', new_post).then(res => {
-      console.log(res.data);
-      console.log('DISPATCHING');
       dispatch(
         ADD_POST({
           post: res.data,
@@ -123,61 +124,6 @@ export default function HomeScreen() {
             <Text color={'white'}>Add Post</Text>
           </HStack>
         </HStack>
-        {/* <HStack spacing={2}>
-          <HStack
-            borderRadius={10}
-            display="flex"
-            alignItems="center"
-            justifyContent={'center'}
-            textAlign="center"
-            spacing={2}
-            padding={2}
-            backgroundColor={'#0053d6'}
-            height={10}
-          >
-            <Icon
-              as={FaFilter}
-              boxSize={4}
-              color={'white'}
-              onClick={() => history.push('/filters')}
-            />
-            <Text color={'white'}>Filter</Text>
-          </HStack>
-          <HStack
-            borderRadius={10}
-            display="flex"
-            alignItems="center"
-            justifyContent={'center'}
-            textAlign="center"
-            spacing={2}
-            padding={2}
-            backgroundColor={'#0053d6'}
-            height={10}
-          >
-            <Icon as={FaClock} boxSize={5} color={'white'} />
-            <Text color={'white'}>Time</Text>
-          </HStack>
-          <HStack
-            borderRadius={10}
-            display="flex"
-            alignItems="center"
-            justifyContent={'center'}
-            textAlign="center"
-            spacing={2}
-            padding={2}
-            backgroundColor={'#0053d6'}
-            height={10}
-          >
-            <Icon
-              as={CgProfile}
-              boxSize={6}
-              color={'white'}
-              onClick={() => {
-                history.push('/profile');
-              }}
-            />
-          </HStack>
-        </HStack> */}
       </Flex>
       <HStack paddingBottom={3} borderBottom={'1px solid #e6e6e6'}>
         <HStack
@@ -231,12 +177,62 @@ export default function HomeScreen() {
         </VStack>
       </Skeleton>
       <Modal isOpen={isOpenClock} onClose={onCloseClock}>
-        <Box padding={2}>
-          <ModalOverlay />
-          <ModalContent>
-            <ModalHeader>Time Now</ModalHeader>
-          </ModalContent>
-        </Box>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalBody>
+            <Flex
+              justifyContent={'center'}
+              alignItems={'center'}
+              flexDirection={'column'}
+              py={5}
+            >
+              <Text>The time is:</Text>
+              <Text fontSize={'2xl'} fontWeight={'bold'} paddingX={2}>
+                {/* get current time in format HH:mm Am/Pm */}
+                {new Date().toLocaleTimeString('en-US', {
+                  hour12: true,
+                  hour: 'numeric',
+                  minute: 'numeric',
+                })}
+              </Text>
+              <Text>Now Showing:</Text>
+              <HStack
+                spacing={2}
+                width={'70%'}
+                wrap={'flex-wrap'}
+                justifyContent={'center'}
+              >
+                {/* {get_currently_filtered_topics(
+                  posts,
+                  filters,
+                  manually_filter,
+                  manually_ignore
+                ).map((topic, index) => (
+                  <HStack
+                    key={index}
+                    minWidth="85px"
+                    py={2}
+                    px={3}
+                    backgroundColor="#001C55"
+                    borderRadius={20}
+                    spacing={1}
+                    mr={2}
+                    mb={2}
+                  >
+                    <Icon
+                      as={get_topic_icon(topic)}
+                      boxSize={5}
+                      color="white"
+                    />
+                    <Text color="white">
+                      {make_topic_name_presentable(topic)}
+                    </Text>
+                  </HStack>
+                ))} */}
+              </HStack>
+            </Flex>
+          </ModalBody>
+        </ModalContent>
       </Modal>
       <Modal isOpen={isOpen} onClose={onClose}>
         <Box padding={2}>
@@ -251,6 +247,7 @@ export default function HomeScreen() {
                 placeholder="What's on your mind?"
                 size="sm"
                 minLength={1}
+                borderColor={emptyPost ? 'red' : 'gray.300'}
               />{' '}
             </ModalBody>
 
@@ -264,8 +261,11 @@ export default function HomeScreen() {
                     if (newPost.length > 0) {
                       // dispatch(ADD_POST({ body: newPost }));
                       add_post(newPost);
+                      setEmptyPost(false);
+                      onClose();
+                    } else {
+                      setEmptyPost(true);
                     }
-                    onClose();
                   }}
                 />
               </HStack>

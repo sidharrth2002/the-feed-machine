@@ -25,13 +25,13 @@ import {
 import { FaArrowLeft, FaPlus, FaTrash } from 'react-icons/fa';
 import { LocalizationProvider, TimePicker } from '@mui/x-date-pickers';
 import { TextField, ThemeProvider, createTheme } from '@mui/material';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import NiceButton from '../../components/Button';
 import { UPDATE_FILTER_PERIODS_FOR_TOPIC } from '../../features/counter';
 import { make_topic_name_presentable } from '../../utils';
 import { useHistory } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 import { useState } from 'react';
 
 const mui_theme = createTheme();
@@ -57,6 +57,8 @@ export default function TopicTimingScreen(props) {
 
   const toast = useToast();
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const dispatch = useDispatch();
 
   return (
     <Box minHeight={'100vh'} padding={4} width="100%" pt={8} pl={8} pr={8}>
@@ -140,10 +142,12 @@ export default function TopicTimingScreen(props) {
                                   ),
                                 ],
                               };
-                              UPDATE_FILTER_PERIODS_FOR_TOPIC({
-                                id: topic.id,
-                                filter_periods: new_timings,
-                              });
+                              dispatch(
+                                UPDATE_FILTER_PERIODS_FOR_TOPIC({
+                                  id: topic.id,
+                                  filter_periods: new_timings,
+                                })
+                              );
                               setTopicData(new_timings);
                             }}
                             renderInput={params => <TextField {...params} />}
@@ -187,10 +191,12 @@ export default function TopicTimingScreen(props) {
                                   ),
                                 ],
                               };
-                              UPDATE_FILTER_PERIODS_FOR_TOPIC({
-                                id: topic.id,
-                                filter_periods: new_timings,
-                              });
+                              dispatch(
+                                UPDATE_FILTER_PERIODS_FOR_TOPIC({
+                                  id: topic.id,
+                                  filter_periods: new_timings,
+                                })
+                              );
                               setTopicData(new_timings);
                             }}
                             renderInput={params => <TextField {...params} />}
@@ -223,10 +229,12 @@ export default function TopicTimingScreen(props) {
                         },
                       ],
                     };
-                    UPDATE_FILTER_PERIODS_FOR_TOPIC({
-                      id: topic.id,
-                      filter_periods: new_timings,
-                    });
+                    dispatch(
+                      UPDATE_FILTER_PERIODS_FOR_TOPIC({
+                        id: topic.id,
+                        filter_periods: new_timings,
+                      })
+                    );
                     setTopicData(new_timings);
                   }}
                 >
@@ -262,10 +270,12 @@ export default function TopicTimingScreen(props) {
                     ),
                   ],
                 };
-                UPDATE_FILTER_PERIODS_FOR_TOPIC({
-                  id: topic.id,
-                  filter_periods: new_timings,
-                });
+                dispatch(
+                  UPDATE_FILTER_PERIODS_FOR_TOPIC({
+                    id: topic.id,
+                    filter_periods: new_timings,
+                  })
+                );
                 setTopicData(new_timings);
 
                 onClose();

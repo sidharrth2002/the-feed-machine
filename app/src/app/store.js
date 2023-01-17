@@ -11,7 +11,7 @@ export default configureStore({
   middleware: getDefaultMiddleware({
     serializableCheck: false,
   }),
-  // preloadedState: localStorage.getItem('reduxState')
-  //   ? JSON.parse(localStorage.getItem('reduxState'))
-  //   : {},
+  preloadedState: localStorage.getItem('reduxState')
+    ? JSON.parse(localStorage.getItem('reduxState'))
+    : {},
 });

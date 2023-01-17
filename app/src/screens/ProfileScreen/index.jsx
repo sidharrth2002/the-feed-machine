@@ -1,4 +1,14 @@
 import {
+  Avatar,
+  Box,
+  Flex,
+  HStack,
+  Heading,
+  Icon,
+  Text,
+  VStack,
+} from '@chakra-ui/react';
+import {
   Bar,
   BarChart,
   CartesianGrid,
@@ -10,27 +20,22 @@ import {
   XAxis,
   YAxis,
 } from 'recharts';
-import {
-  Box,
-  Flex,
-  HStack,
-  Heading,
-  Icon,
-  Text,
-  VStack,
-} from '@chakra-ui/react';
 import { COLORS, screen_time, topic_distribution } from './screen_time';
 import { FaArrowLeft, FaFilter, FaHome } from 'react-icons/fa';
 
 import { BiGlobe } from 'react-icons/bi';
 import { CgProfile } from 'react-icons/cg';
+import { JohnAvatar } from '../../assets';
 import React from 'react';
+import { get_topic_icon } from '../../constants/topic_icons';
+import { make_topic_name_presentable } from '../../utils';
 import { useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 export default function ProfileScreen() {
   const user = useSelector(state => state.auth.user);
   const history = useHistory();
+  const filters = useSelector(state => state.auth.filters);
 
   return (
     <Box minHeight={'100vh'} width="100%">
@@ -69,6 +74,7 @@ export default function ProfileScreen() {
       <Box padding={4} width="100%" pt={6} pl={8} pr={8}>
         <HStack mb={3}>
           {/* <Icon as={FaArrowLeft} boxSize={6} onClick={() => history.goBack()} /> */}
+          <Avatar size={'lg'} src={JohnAvatar} />
           <Heading fontWeight={500}>Your Profile</Heading>
         </HStack>
         <VStack width="100%" justifyContent={'start'}>
@@ -84,11 +90,12 @@ export default function ProfileScreen() {
             Your Topics
           </Heading>
           <Flex flexWrap={'wrap'}>
-            {['Politics', 'Sports', 'Entertainment', 'Technology'].map(
-              (topic, index) => (
+            {filters
+              .map(i => i.name)
+              .map((topic, index) => (
                 <HStack
                   key={index}
-                  minWidth="100px"
+                  minWidth="85px"
                   py={2}
                   px={2}
                   backgroundColor="#001C55"
@@ -97,11 +104,12 @@ export default function ProfileScreen() {
                   mr={2}
                   mb={2}
                 >
-                  <Icon as={BiGlobe} boxSize={6} color="white" />
-                  <Text color="white">{topic}</Text>
+                  <Icon as={get_topic_icon(topic)} boxSize={5} color="white" />
+                  <Text color="white">
+                    {make_topic_name_presentable(topic)}
+                  </Text>
                 </HStack>
-              )
-            )}
+              ))}
           </Flex>
         </Box>
         <Box width="100%" mt={4}>
@@ -127,7 +135,12 @@ export default function ProfileScreen() {
             <Pie
               dataKey="value"
               isAnimationActive={true}
-              data={topic_distribution}
+              data={filters
+                .filter(i => i.custom !== true)
+                .map(i => ({
+                  name: make_topic_name_presentable(i.name),
+                  value: Math.floor(Math.random() * 100) + 1,
+                }))}
               cx="50%"
               cy="50%"
               outerRadius={80}

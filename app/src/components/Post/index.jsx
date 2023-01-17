@@ -1,3 +1,4 @@
+import { BiChat, BiShare } from 'react-icons/bi';
 import {
   Box,
   Flex,
@@ -10,7 +11,6 @@ import {
 } from '@chakra-ui/react';
 import { FaRegThumbsUp, FaThumbsUp } from 'react-icons/fa';
 
-import { BiShare } from 'react-icons/bi';
 import { TOGGLE_LIKE } from '../../features/counter';
 import assets from '../../assets';
 import axios from 'axios';
@@ -100,25 +100,29 @@ export default function Post(props) {
             //     dispatch(TOGGLE_LIKE({ id: get(props, 'id', null) }));
             //   }
             // }}
-            onDoubleClick={e => {
-              toggleLike();
-              // dispatch(TOGGLE_LIKE({ id: get(props, 'id', null) }));
-            }}
             display={'flex'}
             alignItems={'center'}
+            justifyContent={'space-between'}
+            width={'100%'}
           >
-            <Icon
-              as={liked ? FaThumbsUp : FaRegThumbsUp}
-              boxSize={5}
-              color={'#4267B2'}
-              mr={2}
-            />
-            <Text fontSize={14} color="gray" mr={3}>
-              Like
-            </Text>
-            <Icon
-              as={BiShare}
-              boxSize={5}
+            <HStack spacing={0.8}>
+              <Icon
+                as={liked ? FaThumbsUp : FaRegThumbsUp}
+                boxSize={5}
+                color={'#4267B2'}
+                mr={2}
+                onDoubleClick={e => {
+                  toggleLike();
+                  // dispatch(TOGGLE_LIKE({ id: get(props, 'id', null) }));
+                }}
+              />
+              <Text fontSize={14} color="gray" mr={3}>
+                Like
+              </Text>
+            </HStack>
+
+            <HStack
+              spacing={0.8}
               onClick={() =>
                 toast({
                   title: 'Sharing',
@@ -128,10 +132,30 @@ export default function Post(props) {
                   isClosable: true,
                 })
               }
-            />
-            <Text fontSize={14} color="gray" ml={2}>
-              Share
-            </Text>
+            >
+              <Icon as={BiChat} boxSize={5} color={'#4267B2'} mr={2} />
+              <Text fontSize={14} color="gray" mr={3}>
+                Comment
+              </Text>
+            </HStack>
+            <HStack spacing={1}>
+              <Icon
+                as={BiShare}
+                boxSize={5}
+                onClick={() =>
+                  toast({
+                    title: 'Sharing',
+                    description: 'This feature is not available yet.',
+                    status: 'info',
+                    duration: 2000,
+                    isClosable: true,
+                  })
+                }
+              />
+              <Text fontSize={14} color="gray" ml={2}>
+                Share
+              </Text>
+            </HStack>
           </Box>
         </HStack>
       </VStack>

@@ -78,7 +78,7 @@ export default function FilterScreen() {
           <Icon color={'#0053d6'} as={FaFilter} boxSize={5} />
           <Text color={'#0053d6'}>Filtering</Text>
         </HStack>
-        <HStack          
+        <HStack
           justifyContent={'center'}
           width={'33%'}
           py={4}
@@ -262,7 +262,14 @@ export default function FilterScreen() {
                 );
               })}
           </VStack>
-          <HStack width={'100%'} justifyContent="start" alignItems={'center'}>
+          <HStack
+            width={'100%'}
+            justifyContent="start"
+            alignItems={'center'}
+            onClick={() => {
+              history.push('/build-topic');
+            }}
+          >
             <Icon color={'gray'} as={FaPlus} boxSize={4} />
             <Text color={'gray'} fontSize={'1.2rem'}>
               Add a topic
