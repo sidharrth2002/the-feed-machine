@@ -167,21 +167,17 @@ export default function HomeScreen() {
                 manually_filter,
                 manually_ignore,
                 generalTiming
-              )
-                .reverse()
-                .map((post, index) => (
-                  <Post
-                    key={post.id}
-                    topics={post.topics}
-                    feed_filtering
-                    {...post}
-                  />
-                ))
-            : posts
-                .reverse()
-                .map((post, index) => (
-                  <Post key={post.id} topics={post.topics} {...post} />
-                ))}
+              ).map((post, index) => (
+                <Post
+                  key={post.id}
+                  topics={post.topics}
+                  feed_filtering
+                  {...post}
+                />
+              ))
+            : posts.map((post, index) => (
+                <Post key={post.id} topics={post.topics} {...post} />
+              ))}
         </VStack>
       </Skeleton>
       <Modal isOpen={isOpenClock} onClose={onCloseClock}>
@@ -209,6 +205,7 @@ export default function HomeScreen() {
                 width={'70%'}
                 wrap={'flex-wrap'}
                 justifyContent={'center'}
+                alignItems={'center'}
               >
                 {filters
                   .filter(filter => {

@@ -1,4 +1,5 @@
 import DAYS from '../constants/days';
+import { get } from 'lodash';
 import moment from 'moment';
 
 const filter_posts = (
@@ -11,12 +12,37 @@ const filter_posts = (
   // filter posts based on filter timings
 
   const filtered_posts = p.filter(post => {
-    const post_topics = post.topics;
+    let post_topics = post.topics;
+
+    for (const topic of post_topics) {
+      if (
+        get(
+          filters.find(filter => filter.name === topic.toLowerCase()),
+          'custom',
+          false
+        ) === true
+      ) {
+        post_topics += filters.find(filter => filter.name === topic).subtopics;
+      }
+    }
+
+    console.log('post_topics', post_topics);
 
     const today = DAYS[new Date().getDay()];
 
     for (const filter of manually_filter) {
-      if (post_topics.includes(filter)) {
+      console.log('manually filter', filter);
+      let subtopics = get(
+        filters.find(f => f.name === filter),
+        'subtopics',
+        []
+      );
+
+      // if post topics includes filter or any of its subtopics, filter it out
+      if (
+        post_topics.includes(filter) ||
+        subtopics.some(subtopic => post_topics.includes(subtopic))
+      ) {
         return false;
       }
     }
@@ -162,9 +188,6 @@ const isTopicFilteredNow = (
 
   // check general timing iff there are no filters set for this topic today
   if (filtering_periods[now_day].length === 0) {
-    console.log('no filters set for this topic today');
-    console.log('checking general timing');
-    console.log(topic);
     let today = DAYS[now.getDay()];
     for (const period of generalTiming[today]) {
       let start = period.timeStart;

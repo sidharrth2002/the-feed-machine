@@ -36,6 +36,7 @@ import { GiTimeBomb } from 'react-icons/gi';
 import NiceButton from '../../components/Button';
 import { isTopicFilteredNow } from '../../engine/filtering';
 import { make_topic_name_presentable } from '../../utils';
+import { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 
 export default function FilterScreen() {
@@ -48,10 +49,10 @@ export default function FilterScreen() {
   const manually_filter = useSelector(state => state.auth.manually_filter);
   const manually_ignore = useSelector(state => state.auth.manually_ignore);
 
-  //   useEffect(() => {
-  //     open information modal only once at the start
-  //     onOpen();
-  //   }, [onOpen]);
+  useEffect(() => {
+    // open information modal only once at the start
+    onOpen();
+  }, [onOpen]);
 
   return (
     <Box padding="0rem">
@@ -227,6 +228,14 @@ export default function FilterScreen() {
                       {/* <Icon as={FaClock} boxSize={6} onClick={() => {
                         history.push(`/timing/${filter.name}`);
                       }} /> */}
+                      <Icon
+                        as={CgPen}
+                        boxSize={6}
+                        color={'#0053d6'}
+                        onClick={() => {
+                          history.push(`/edit-topic/${filter.name}`);
+                        }}
+                      />
                       <Image
                         maxW={7}
                         src={ClockIcon}

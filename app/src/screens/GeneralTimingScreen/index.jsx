@@ -165,7 +165,7 @@ export default function TimingScreen() {
                                 toast({
                                   title: 'Error',
                                   description:
-                                    'End time cannot be less than start time',
+                                    'End time cannot be smaller than start time',
                                   status: 'error',
                                   duration: 5000,
                                   isClosable: true,

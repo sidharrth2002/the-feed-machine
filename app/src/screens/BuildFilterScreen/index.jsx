@@ -115,7 +115,7 @@ export default function BuildFilterScreen() {
                 'entertainment',
                 'vehicles',
               ]
-                .filter(f => filters.map(f => f.name).includes(f) === false)
+                // .filter(f => filters.map(f => f.name).includes(f) === false)
                 .map(topic => {
                   return {
                     value: topic,

@@ -125,7 +125,7 @@ export default function Post(props) {
               spacing={0.8}
               onClick={() =>
                 toast({
-                  title: 'Sharing',
+                  title: 'Comments',
                   description: 'This feature is not available yet.',
                   status: 'info',
                   duration: 2000,
