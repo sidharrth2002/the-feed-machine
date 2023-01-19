@@ -19,6 +19,7 @@ import {
   useDisclosure,
   useToast,
 } from '@chakra-ui/react';
+import { REMOVE_FILTER, UPDATE_FILTER } from '../../features/counter';
 import {
   change_topic_name_to_id,
   make_topic_name_presentable,
@@ -27,7 +28,6 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { FaArrowLeft } from 'react-icons/fa';
 import { Select } from 'chakra-react-select';
-import { UPDATE_FILTER } from '../../features/counter';
 import { get } from 'lodash';
 import { useHistory } from 'react-router-dom';
 import { useState } from 'react';
@@ -47,6 +47,7 @@ export default function EditFilterScreen(props) {
     get(filter, 'description', ' ')
   );
   const [topics, setTopics] = useState(get(filter, 'subtopics', [name]));
+  const [optionClicked, setOptionClicked] = useState('');
 
   const updateFilter = () => {
     dispatch(
@@ -55,6 +56,14 @@ export default function EditFilterScreen(props) {
         name: change_topic_name_to_id(name),
         description,
         topics,
+      })
+    );
+  };
+
+  const deleteFilter = () => {
+    dispatch(
+      REMOVE_FILTER({
+        name: get(filter, 'name', ''),
       })
     );
   };
@@ -139,14 +148,30 @@ export default function EditFilterScreen(props) {
       </Box>
       <Box
         position={'absolute'}
+        bottom={'8vh'}
+        width={'100%'}
+        textAlign={'center'}
+        color={'red'}
+        py={4}
+        onClick={() => {
+          setOptionClicked('delete');
+          onOpen();
+        }}
+      >
+        <Text>DELETE FILTER</Text>
+      </Box>
+      <Box
+        position={'absolute'}
         bottom={0}
         width={'100%'}
         textAlign={'center'}
         backgroundColor={'black'}
         color={'white'}
         py={4}
+        height={'8vh'}
         onClick={() => {
           if (name.length > 0 && description.length > 0 && topics.length > 0) {
+            setOptionClicked('save');
             onOpen();
           } else {
             toast({
@@ -185,9 +210,14 @@ export default function EditFilterScreen(props) {
               variant={'solid'}
               mr={3}
               onClick={() => {
-                updateFilter();
-                onClose();
-                history.goBack();
+                if (optionClicked === 'delete') {
+                  deleteFilter();
+                  onClose();
+                  history.goBack();
+                } else if (optionClicked === 'save') {
+                  updateFilter();
+                  history.goBack();
+                }
               }}
             >
               Save

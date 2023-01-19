@@ -6,9 +6,6 @@ const options = {
 
 const screen_time = [
   {
-    // name: Date.now() - 6 * 24 * 60 * 60 * 1000,
-    // format date to be readable in format day/month
-    // do not include year
     name: new Date(Date.now() - 6 * 24 * 60 * 60 * 1000).toLocaleDateString(
       'en-UK',
       options

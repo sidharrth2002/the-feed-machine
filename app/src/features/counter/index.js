@@ -58,7 +58,7 @@ export const authSlice = createSlice({
     },
     REMOVE_FILTER: (state, action) => {
       state.filters = state.filters.filter(
-        filter => filter !== action.payload.filter
+        filter => filter.name !== action.payload.name
       );
     },
     ADD_MANUALLY_FILTER: (state, action) => {
@@ -105,6 +105,7 @@ export const {
   ADD_POST,
   TOGGLE_FILTERING,
   ADD_FILTER,
+  REMOVE_FILTER,
   UPDATE_FILTER,
   ACTIVATE_FILTER,
   DEACTIVATE_FILTER,
