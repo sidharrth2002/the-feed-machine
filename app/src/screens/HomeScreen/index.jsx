@@ -4,6 +4,7 @@ import {
   Flex,
   HStack,
   Icon,
+  Image,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -25,10 +26,12 @@ import {
   isTopicFilteredNow,
 } from '../../engine/filtering';
 import React, { useEffect, useState } from 'react';
+import assets, { landscape } from '../../assets/';
 import { useDispatch, useSelector } from 'react-redux';
 
 import NiceButton from '../../components/Button';
 import Post from '../../components/Post';
+import StoriesSlider from '../../components/StoriesSlider';
 import axios from 'axios';
 import { get_topic_icon } from '../../constants/topic_icons';
 import { make_topic_name_presentable } from '../../utils';
@@ -157,6 +160,7 @@ export default function HomeScreen() {
           <Text>Profile</Text>
         </HStack>
       </HStack>
+      <StoriesSlider />
       <Skeleton isLoaded={!loading}>
         <VStack mt={1}>
           {/* messy but works */}
