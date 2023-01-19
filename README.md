@@ -9,3 +9,7 @@ You need to run all components of the app to get started, including a React fron
 ```bash
 chmod +x ./run.sh && ./start.sh
 ```
+
+### Screenshots
+
+<img src="./screenshots/home.png" width="200" text-align="center" />
