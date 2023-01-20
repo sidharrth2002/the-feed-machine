@@ -34,6 +34,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import ClockIcon from '../../assets/clock.svg';
 import { GiTimeBomb } from 'react-icons/gi';
 import NiceButton from '../../components/Button';
+import assets from '../../assets';
 import { isTopicFilteredNow } from '../../engine/filtering';
 import { make_topic_name_presentable } from '../../utils';
 import { useEffect } from 'react';
@@ -122,9 +123,14 @@ export default function FilterScreen() {
             alignItems="center"
           >
             <Text fontSize={'1.2rem'}>General Timing</Text>
-            <Icon
-              as={GiTimeBomb}
+            {/* <Icon
+              as={assets['timing']}
               boxSize={8}
+              onClick={() => history.push('/timing')}
+            /> */}
+            <Image
+              src={assets['timing']}
+              width={8}
               onClick={() => history.push('/timing')}
             />
           </Flex>

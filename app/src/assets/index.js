@@ -19,6 +19,7 @@ import sid from './sid.jpeg';
 import splash_2 from './splash_2.png';
 import splash_screen from './splash_screen.png';
 import stockholm from './stockholm.jpeg';
+import timing from './timing.png';
 
 const assets = {
   SplashLogo,
@@ -41,6 +42,7 @@ const assets = {
   cycling,
   party,
   biden,
+  timing,
 };
 
 export { SplashLogo, SecondSplash, Stockholm, Beach, JohnAvatar };
