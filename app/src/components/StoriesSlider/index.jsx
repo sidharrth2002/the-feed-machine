@@ -1,10 +1,12 @@
-import { Avatar, Box, HStack, Icon, Image } from '@chakra-ui/react';
+import { Avatar, Box, HStack, Icon, Image, useToast } from '@chakra-ui/react';
 
 import { FaPlus } from 'react-icons/fa';
 import React from 'react';
 import assets from '../../assets';
 
 export default function StoriesSlider() {
+  const toast = useToast();
+
   return (
     <HStack minHeight={150} padding={3} overflowX={'scroll'}>
       {['autumn', 'landscape', 'party', 'biden'].map((asset, index) => (
@@ -15,6 +17,15 @@ export default function StoriesSlider() {
           boxShadow="md"
           overflow={'hidden'}
           position={'relative'}
+          onClick={() => {
+            toast({
+              title: 'Story',
+              description: 'Not implemented yet',
+              status: 'info',
+              duration: 9000,
+              isClosable: true,
+            });
+          }}
         >
           <Image
             src={assets[asset]}

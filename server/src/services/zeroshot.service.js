@@ -3,7 +3,7 @@ const Topic = require('../models/topic.model');
 
 const classify = async (text) => {
   // const topics = Topic.find();
-  const topicNames = ['news', 'politics', 'climate', 'sports', 'entertainment', 'vehicles'];
+  const topicNames = ['news', 'politics', 'climate', 'sports', 'entertainment', 'vehicles', 'pets'];
 
   const response = await axios.post(
     'http://localhost:8080/classify/',

@@ -50,10 +50,10 @@ export default function FilterScreen() {
   const manually_filter = useSelector(state => state.auth.manually_filter);
   const manually_ignore = useSelector(state => state.auth.manually_ignore);
 
-  useEffect(() => {
-    // open information modal only once at the start
-    onOpen();
-  }, [onOpen]);
+  // useEffect(() => {
+  //   // open information modal only once at the start
+  //   onOpen();
+  // }, [onOpen]);
 
   return (
     <Box padding="0rem">

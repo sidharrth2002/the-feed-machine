@@ -69,7 +69,7 @@ export default function TopicTimingScreen(props) {
         </Heading>
       </HStack>
       <Heading fontSize={'1.3rem'} fontWeight={500} mb={4}>
-        When do you want to see posts related to this topic?
+        When do you want to filter out posts related to this topic?
       </Heading>
 
       <Accordion>
