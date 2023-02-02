@@ -7,7 +7,7 @@ See only the posts you want to see. No more scrolling through your feed to find 
 You need to run all components of the app to get started, including a React frontend, a Node.js server and a FastAPI server. You can run all of these with the following command:
 
 ```bash
-chmod +x ./run.sh && ./start.sh
+chmod +x ./start.sh && ./start.sh
 ```
 
 ### Screenshots
