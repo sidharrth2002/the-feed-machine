@@ -1,4 +1,4 @@
-# The Feed Machine 🥵
+# The Feed Machine
 
 See only the posts you want to see. No more scrolling through your feed to find the posts you actually want to see.
 
